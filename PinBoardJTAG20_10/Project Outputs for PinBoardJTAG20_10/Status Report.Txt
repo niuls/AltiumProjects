@@ -1,0 +1,26 @@
+Output: Gerber Files
+Type  : Gerber
+From  : Variant [[No Variations]] of Project [PinBoardJTAG20_10.PrjPcb]
+   Generated File[PinBoardJTAG20_10.GTL]
+   Generated File[PinBoardJTAG20_10.GBL]
+   Generated File[PinBoardJTAG20_10.GPB]
+   Generated File[PinBoardJTAG20_10.GPT]
+   Generated File[PinBoardJTAG20_10.GTO]
+   Generated File[PinBoardJTAG20_10.GTS]
+   Generated File[PinBoardJTAG20_10.GBS]
+   Generated File[PinBoardJTAG20_10.GBP]
+   Generated File[PinBoardJTAG20_10.GBO]
+   Generated File[PinBoardJTAG20_10.GKO]
+   Generated File[PinBoardJTAG20_10.GM1]
+   Generated File[PinBoardJTAG20_10.GM2]
+   Generated File[PinBoardJTAG20_10.GM13]
+   Generated File[PinBoardJTAG20_10.GM15]
+   Generated File[PinBoardJTAG20_10.RUL]
+   Generated File[PinBoardJTAG20_10.EXTREP]
+   Generated File[PinBoardJTAG20_10.REP]
+
+
+Files Generated   : 17
+Documents Printed : 0
+
+Finished Output Generation At 14:45:34 On 2015/9/18 ÐÇÆÚÎå

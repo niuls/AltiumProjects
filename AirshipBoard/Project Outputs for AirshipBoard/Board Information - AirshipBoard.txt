@@ -1,0 +1,12 @@
+Board Information Report
+Filename     : C:\Documents\Altium\Projects\AirshipBoard\AirshipBoard.PcbDoc
+Date         : 2015/9/30
+Time         : 16:42:29
+Time Elapsed : 00:00:00
+
+Routing Information
+    Routing completion, 100.00%
+    Connections, 281
+    Connections routed, 281
+    Connections remaining, 0
+count : 4

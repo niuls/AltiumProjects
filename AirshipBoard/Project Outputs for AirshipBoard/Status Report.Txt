@@ -1,0 +1,10 @@
+Output: Report Single Pin Nets
+Type  : SinglePinNetReporter
+From  : Variant [[No Variations]] of Project [AirshipBoard.PrjPcb]
+   Generated File[AirshipBoard.REP]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 12:15:12 On 2015/9/30

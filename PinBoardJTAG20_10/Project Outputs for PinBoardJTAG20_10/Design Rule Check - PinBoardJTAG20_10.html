@@ -1,0 +1,735 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : sans-serif;
+			color : white;
+			background-color : #21489e;
+			padding: 0.3em;
+		}
+		body {
+			font-family : verdana;
+		}
+		td, th {
+			padding: 0.5em;
+			text-align : center;
+			width : 18%;
+		}
+		th {
+			background-color : #A6CAF0;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+		}
+		
+		.DRC_summary_header {							
+			padding-bottom : 0.1em;
+			border : 0px solid black;							
+			width: 100%;
+                        align: right;
+                        
+		}
+
+		.DRC_summary_header_col1, 
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3
+		{
+			color : black;
+			font-size:150%;
+                        padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2: 0em;
+			border : 0px solid black;
+			width : auto;
+			vertical-align: top;
+			font-weight: bold;				
+		}
+		
+		.DRC_summary_header_col1 	
+		{		                       
+			text-align: right;
+                        width: auto;	
+		}
+
+		.DRC_summary_header_col2 	
+		{		
+			text-align: center;	
+		}
+
+		.DRC_summary_header_col3 	
+		{		
+			text-align: left;	
+		}
+
+
+		
+		.header_holder
+		{
+		Width = 100%;
+		border = 0px solid green;
+		padding = 0;
+		}
+		
+		
+		
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+                {
+			left:0;
+			top:0;
+			padding-top : 0.1em;			
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top
+
+		}
+		.front_matter {	
+			
+			margin-top: 5px;
+ 			margin-left: 0px;					 			
+ 			horizontal-align: left;
+		}
+				
+		
+		.front_matter_column1 {
+			width : 10em;	
+			text-align  : right;
+			padding-right:0.1em;
+			
+		}
+		
+		.front_matter_column2 {
+                        width: 0.1em;
+			align: center;
+			text-align : center;
+			margin-right  : 0.1em;	
+			margin-left   : 0.1em;
+		}
+		.front_matter_column3 {
+			width         : auto;  
+			text-align    : left;	
+			margin-right  : 0.5em;				
+		}
+		
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : right;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #EEEEE0 
+		}
+		tr.onmouseout_even { 
+			background-color : #F3F3E3   
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : lightYellow
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #008000 
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD14\Templates\AD-rgb_logo_223x64.gif
+		"><a href="dxpprocess://Client:SetupPreferences?Server=PCB|PageName=Reports" class="customize"><acronym title="dxpprocess://Client:SetupPreferences?Server=PCB|PageName=Reports">customize</acronym></a><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td Style="width:70%">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3">2015/9/18 ÐÇÆÚÎå</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3">13:58:37</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename</td>
+<td class="front_matter_column2">:</td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb" class="file"><acronym title="C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb">C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb</acronym></a></td>
+</tr>
+</table>
+</td>
+<td Style="Width:30%">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings</td>
+<td class="DRC_summary_header_col2">:</td>
+<td class="DRC_summary_header_col3" style="color : red">6</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations</td>
+<td class="DRC_summary_header_col2">:</td>
+<td class="DRC_summary_header_col3" style="color : red">87</td></tr>
+</table>
+</td>
+</table>
+<hr><a name="IDYF4HV1T0PXYIKU0M0PR05QXRIBUE4MBJYY1ZR2D2P4DJ513WQ0V"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNF24NPQL5CREE42YHLPAKDNBYDPXFSQ43KZOT3IEKX3HWL23IB2B">Zero hole size multi-layer pad(s) detected</a></td>
+<td class="column2">3</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID5CEPYM3HHXT5EWMZZWPX3VG5VG4BB0LN5QHRIDN43EUJDAPQKRZI">Multilayer Pads with 0 size Hole found</a></td>
+<td class="column2">3</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">6</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXNKC3UOFYYS4TC15AX51HCN3KWLTXRRER0ZTIB4GCJZGLUO32MJ">Width Constraint (Min=0.3mm) (Max=0.6mm) (Preferred=0.5mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMES3HNU2EEYEOG5WCXGBXOHTSNCCDOOF3E0YRADH1FAZC4YWSXN">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID32VLWFCSG12MSC2ZUP1CB1TPLZH0LW25XX4VXNCAT41F55IWNGD">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDLB4K30NT14JGLKWBTWNRJZULGIK2UUBE4QELD5GUF1GUAFPLAHOH">Clearance Constraint (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">5</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID2E4TYWDDTQQDFWFYGYZZRNRWOCMBYBBD0EJ2Z3CF3KINMONQH14M">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDSBSQWM0Z3YG0IILHCBP4YIQFNPYTCWWPPHGDAZL3UNU3T15ERDAO">Width Constraint (Min=0.3mm) (Max=1mm) (Preferred=0.6mm) (InNet('GND','VIN','5V','3.3V'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDH5I0WLHHX1IFLYVRSWRS0BHJLPDZNORWDPM5RON02231431RHSTL">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDZZ3PQDHZUFMQJGWMJMD0WUWWQXRKAYQJQRRHMFEXC4FY2CXE5HE">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDS14BNX2QA1DLJYVVA1CPK002BMFTKXVHUAAYEVLJ5GRTTBR2WQL">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">6</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBSQPD0YJY4JNCWRYMMPA43ISGI1NB0GLRVUGLOG03J1NMK0S1SZO">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">8</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID5EO01FIZQ0DWTLNAOEVEKPFBG4CSZ5JJED5UDDMTRDJNLBF0NI">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">22</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQ52TZ5KX5VDLDEUAJPBCMP3QQNTMQ1R33S2FDGM0UPZXXX0RYB4F">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">27</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDM53J2OCUU2NZKECIWUBXJYSGHFELFGSM23CLG2KJAWD2I0P14ZKC">Silk primitive without silk layer</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDWVSFTYDSLMBHLGVF5TBPZ2T54KDMDH3PD5PSQTCVZU5UYPKTF0WB">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID51LJMW4J5K5WE54IX5AT4ACE2B022N4LHAE3ZKBL1TV2FNNZTPQG">Rule</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID3NH1YPPASN2LEKAHYZBUFGVFIHAITXTPBSHQ5HI13FSBV4JE0YJP">Room PinBoardJTAG20_10 (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('PinBoardJTAG20_10'))</a></td>
+<td class="column2">19</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">87</td>
+</tr>
+</table><br><hr><a name="IDTVO5ODYWCVEHKTFFF0Q5BBXEKJM0YP1NNB5N51B31RBS3JVUVONK"><h2>Warnings</h2></a><a name="IDNF24NPQL5CREE42YHLPAKDNBYDPXFSQ43KZOT3IEKX3HWL23IB2B"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="warning">Zero hole size multi-layer pad(s) detected</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4867.417mil|Location2.X=5052.583mil|Location1.Y=2697.26mil|Location2.Y=2784mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4867.417mil|Location2.X=5052.583mil|Location1.Y=2697.26mil|Location2.Y=2784mil|Absolute=True">Pad J1-1(125.984mm,69.612mm)  Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">Net VIN</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4877.26mil|Location2.X=5042.74mil|Location1.Y=2941.354mil|Location2.Y=3028.095mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4877.26mil|Location2.X=5042.74mil|Location1.Y=2941.354mil|Location2.Y=3028.095mil|Absolute=True">Pad J1-2(125.984mm,75.812mm)  Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">Net GND</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4719.779mil|Location2.X=4806.52mil|Location1.Y=2783.874mil|Location2.Y=2949.354mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4719.779mil|Location2.X=4806.52mil|Location1.Y=2783.874mil|Location2.Y=2949.354mil|Absolute=True">Pad J1-3(120.984mm,72.812mm)  Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">Net GND</acronym></a></td>
+</tr>
+</table></a><a href="#top">Back to top</a><br><br><a name="ID5CEPYM3HHXT5EWMZZWPX3VG5VG4BB0LN5QHRIDN43EUJDAPQKRZI"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="warning">Multilayer Pads with 0 size Hole found</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4867.417mil|Location2.X=5052.583mil|Location1.Y=2697.26mil|Location2.Y=2784mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4867.417mil|Location2.X=5052.583mil|Location1.Y=2697.26mil|Location2.Y=2784mil|Absolute=True">Pad J1-1(125.984mm,69.612mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4877.26mil|Location2.X=5042.74mil|Location1.Y=2941.354mil|Location2.Y=3028.095mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4877.26mil|Location2.X=5042.74mil|Location1.Y=2941.354mil|Location2.Y=3028.095mil|Absolute=True">Pad J1-2(125.984mm,75.812mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4719.779mil|Location2.X=4806.52mil|Location1.Y=2783.874mil|Location2.Y=2949.354mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4719.779mil|Location2.X=4806.52mil|Location1.Y=2783.874mil|Location2.Y=2949.354mil|Absolute=True">Pad J1-3(120.984mm,72.812mm)  Multi-Layer</acronym></a></td>
+</tr>
+</table></a><a href="#top">Back to top</a><br><br><hr><a name="IDLB4K30NT14JGLKWBTWNRJZULGIK2UUBE4QELD5GUF1GUAFPLAHOH"><table>
+<tr>
+<th style="text-align : left" colspan="2" class="rule">Clearance Constraint (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3338.488mil|Location2.X=3407.512mil|Location1.Y=3128.551mil|Location2.Y=3197.575mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3338.488mil|Location2.X=3407.512mil|Location1.Y=3128.551mil|Location2.Y=3197.575mil|Absolute=True">Pad USB1-6(85.674mm,80.342mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3309.079mil|Location2.X=3336.764mil|Location1.Y=3171.732mil|Location2.Y=3199.417mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3309.079mil|Location2.X=3336.764mil|Location1.Y=3171.732mil|Location2.Y=3199.417mil|Absolute=True">Pad USB1-0(84.402mm,80.914mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.126mil|Location2.X=3204.874mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.126mil|Location2.X=3204.874mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-1(81.102mm,80.239mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3151.598mil|Location2.X=3179.283mil|Location1.Y=3171.732mil|Location2.Y=3199.417mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3151.598mil|Location2.X=3179.283mil|Location1.Y=3171.732mil|Location2.Y=3199.417mil|Absolute=True">Pad USB1-0(80.402mm,80.914mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3232.307mil|Location2.X=3256.055mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3232.307mil|Location2.X=3256.055mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-3(82.402mm,80.239mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.898mil|Location2.X=3281.646mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.898mil|Location2.X=3281.646mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-4(83.052mm,80.239mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3206.716mil|Location2.X=3230.464mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3206.716mil|Location2.X=3230.464mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-2(81.752mm,80.239mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.126mil|Location2.X=3204.874mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.126mil|Location2.X=3204.874mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-1(81.102mm,80.239mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3185.126mil|Location2.X=3200.874mil|Location1.Y=3097.126mil|Location2.Y=3166.874mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3185.126mil|Location2.X=3200.874mil|Location1.Y=3097.126mil|Location2.Y=3166.874mil|Absolute=True">Track (81.102mm,78.867mm)(81.102mm,80.239mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3206.716mil|Location2.X=3230.464mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3206.716mil|Location2.X=3230.464mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-2(81.752mm,80.239mm)  Bottom Layer</acronym></a></td>
+</tr>
+</table></a><a href="#top">Back to top</a><br><br><a name="IDS14BNX2QA1DLJYVVA1CPK002BMFTKXVHUAAYEVLJ5GRTTBR2WQL"><table>
+<tr>
+<th style="text-align : left" colspan="2" class="rule">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3115.181mil|Location2.X=3154.677mil|Location1.Y=3237.677mil|Location2.Y=3277.173mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3115.181mil|Location2.X=3154.677mil|Location1.Y=3237.677mil|Location2.Y=3277.173mil|Absolute=True">Pad USB1-6(79.627mm,82.739mm)  Multi-Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3115.181mil|Location2.X=3154.677mil|Location1.Y=3267.205mil|Location2.Y=3306.701mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3115.181mil|Location2.X=3154.677mil|Location1.Y=3267.205mil|Location2.Y=3306.701mil|Absolute=True">Pad USB1-6(79.627mm,83.489mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3101.401mil|Location2.X=3168.456mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3101.401mil|Location2.X=3168.456mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True">Pad USB1-6(79.627mm,83.089mm)  Multi-Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3115.181mil|Location2.X=3154.677mil|Location1.Y=3267.205mil|Location2.Y=3306.701mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3115.181mil|Location2.X=3154.677mil|Location1.Y=3267.205mil|Location2.Y=3306.701mil|Absolute=True">Pad USB1-6(79.627mm,83.489mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3101.401mil|Location2.X=3168.456mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3101.401mil|Location2.X=3168.456mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True">Pad USB1-6(79.627mm,83.089mm)  Multi-Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3115.181mil|Location2.X=3154.677mil|Location1.Y=3237.677mil|Location2.Y=3277.173mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3115.181mil|Location2.X=3154.677mil|Location1.Y=3237.677mil|Location2.Y=3277.173mil|Absolute=True">Pad USB1-6(79.627mm,82.739mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3333.685mil|Location2.X=3373.181mil|Location1.Y=3237.677mil|Location2.Y=3277.173mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3333.685mil|Location2.X=3373.181mil|Location1.Y=3237.677mil|Location2.Y=3277.173mil|Absolute=True">Pad USB1-6(85.177mm,82.739mm)  Multi-Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3333.685mil|Location2.X=3373.181mil|Location1.Y=3267.205mil|Location2.Y=3306.701mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3333.685mil|Location2.X=3373.181mil|Location1.Y=3267.205mil|Location2.Y=3306.701mil|Absolute=True">Pad USB1-6(85.177mm,83.489mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3319.905mil|Location2.X=3386.961mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3319.905mil|Location2.X=3386.961mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True">Pad USB1-6(85.177mm,83.089mm)  Multi-Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3333.685mil|Location2.X=3373.181mil|Location1.Y=3267.205mil|Location2.Y=3306.701mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3333.685mil|Location2.X=3373.181mil|Location1.Y=3267.205mil|Location2.Y=3306.701mil|Absolute=True">Pad USB1-6(85.177mm,83.489mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3319.905mil|Location2.X=3386.961mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3319.905mil|Location2.X=3386.961mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True">Pad USB1-6(85.177mm,83.089mm)  Multi-Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3333.685mil|Location2.X=3373.181mil|Location1.Y=3237.677mil|Location2.Y=3277.173mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3333.685mil|Location2.X=3373.181mil|Location1.Y=3237.677mil|Location2.Y=3277.173mil|Absolute=True">Pad USB1-6(85.177mm,82.739mm)  Multi-Layer</acronym></a></td>
+</tr>
+</table></a><a href="#top">Back to top</a><br><br><a name="IDBSQPD0YJY4JNCWRYMMPA43ISGI1NB0GLRVUGLOG03J1NMK0S1SZO"><table>
+<tr>
+<th style="text-align : left" colspan="2" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3283.488mil|Location2.X=3307.236mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3283.488mil|Location2.X=3307.236mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-5(83.702mm,80.239mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3309.079mil|Location2.X=3336.764mil|Location1.Y=3171.732mil|Location2.Y=3199.417mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3309.079mil|Location2.X=3336.764mil|Location1.Y=3171.732mil|Location2.Y=3199.417mil|Absolute=True">Pad USB1-0(84.402mm,80.914mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3338.488mil|Location2.X=3407.512mil|Location1.Y=3128.551mil|Location2.Y=3197.575mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3338.488mil|Location2.X=3407.512mil|Location1.Y=3128.551mil|Location2.Y=3197.575mil|Absolute=True">Pad USB1-6(85.674mm,80.342mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3309.079mil|Location2.X=3336.764mil|Location1.Y=3171.732mil|Location2.Y=3199.417mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3309.079mil|Location2.X=3336.764mil|Location1.Y=3171.732mil|Location2.Y=3199.417mil|Absolute=True">Pad USB1-0(84.402mm,80.914mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.126mil|Location2.X=3204.874mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.126mil|Location2.X=3204.874mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-1(81.102mm,80.239mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3151.598mil|Location2.X=3179.283mil|Location1.Y=3171.732mil|Location2.Y=3199.417mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3151.598mil|Location2.X=3179.283mil|Location1.Y=3171.732mil|Location2.Y=3199.417mil|Absolute=True">Pad USB1-0(80.402mm,80.914mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3080.488mil|Location2.X=3149.512mil|Location1.Y=3128.551mil|Location2.Y=3197.575mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3080.488mil|Location2.X=3149.512mil|Location1.Y=3128.551mil|Location2.Y=3197.575mil|Absolute=True">Pad USB1-6(79.121mm,80.342mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3151.598mil|Location2.X=3179.283mil|Location1.Y=3171.732mil|Location2.Y=3199.417mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3151.598mil|Location2.X=3179.283mil|Location1.Y=3171.732mil|Location2.Y=3199.417mil|Absolute=True">Pad USB1-0(80.402mm,80.914mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.898mil|Location2.X=3281.646mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.898mil|Location2.X=3281.646mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-4(83.052mm,80.239mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3283.488mil|Location2.X=3307.236mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3283.488mil|Location2.X=3307.236mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-5(83.702mm,80.239mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3232.307mil|Location2.X=3256.055mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3232.307mil|Location2.X=3256.055mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-3(82.402mm,80.239mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.898mil|Location2.X=3281.646mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.898mil|Location2.X=3281.646mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-4(83.052mm,80.239mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3206.716mil|Location2.X=3230.464mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3206.716mil|Location2.X=3230.464mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-2(81.752mm,80.239mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.126mil|Location2.X=3204.874mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.126mil|Location2.X=3204.874mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-1(81.102mm,80.239mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3232.307mil|Location2.X=3256.055mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3232.307mil|Location2.X=3256.055mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-3(82.402mm,80.239mm)  Bottom Layer</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3206.716mil|Location2.X=3230.464mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3206.716mil|Location2.X=3230.464mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-2(81.752mm,80.239mm)  Bottom Layer</acronym></a></td>
+</tr>
+</table></a><a href="#top">Back to top</a><br><br><a name="ID5EO01FIZQ0DWTLNAOEVEKPFBG4CSZ5JJED5UDDMTRDJNLBF0NI"><table>
+<tr>
+<th style="text-align : left" colspan="2" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5042.677mil|Location2.X=5141.103mil|Location1.Y=2701.26mil|Location2.Y=2709.134mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5042.677mil|Location2.X=5141.103mil|Location1.Y=2701.26mil|Location2.Y=2709.134mil|Absolute=True">Track (128.184mm,68.712mm)(130.484mm,68.712mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4867.417mil|Location2.X=5052.583mil|Location1.Y=2697.26mil|Location2.Y=2784mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4867.417mil|Location2.X=5052.583mil|Location1.Y=2697.26mil|Location2.Y=2784mil|Absolute=True">Pad J1-1(125.984mm,69.612mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4778.898mil|Location2.X=4877.323mil|Location1.Y=2701.26mil|Location2.Y=2709.134mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4778.898mil|Location2.X=4877.323mil|Location1.Y=2701.26mil|Location2.Y=2709.134mil|Absolute=True">Track (121.484mm,68.712mm)(123.784mm,68.712mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4867.417mil|Location2.X=5052.583mil|Location1.Y=2697.26mil|Location2.Y=2784mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4867.417mil|Location2.X=5052.583mil|Location1.Y=2697.26mil|Location2.Y=2784mil|Absolute=True">Pad J1-1(125.984mm,69.612mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4778.898mil|Location2.X=4786.772mil|Location1.Y=2701.26mil|Location2.Y=2783.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4778.898mil|Location2.X=4786.772mil|Location1.Y=2701.26mil|Location2.Y=2783.937mil|Absolute=True">Track (121.484mm,68.712mm)(121.484mm,70.612mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4719.779mil|Location2.X=4806.52mil|Location1.Y=2783.874mil|Location2.Y=2949.354mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4719.779mil|Location2.X=4806.52mil|Location1.Y=2783.874mil|Location2.Y=2949.354mil|Absolute=True">Pad J1-3(120.984mm,72.812mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4778.898mil|Location2.X=4786.772mil|Location1.Y=2949.291mil|Location2.Y=3283.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4778.898mil|Location2.X=4786.772mil|Location1.Y=2949.291mil|Location2.Y=3283.937mil|Absolute=True">Track (121.484mm,75.012mm)(121.484mm,83.312mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4719.779mil|Location2.X=4806.52mil|Location1.Y=2783.874mil|Location2.Y=2949.354mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4719.779mil|Location2.X=4806.52mil|Location1.Y=2783.874mil|Location2.Y=2949.354mil|Absolute=True">Pad J1-3(120.984mm,72.812mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3451.032mil|Location2.X=3571mil|Location1.Y=2760mil|Location2.Y=2839.981mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3451.032mil|Location2.X=3571mil|Location1.Y=2760mil|Location2.Y=2839.981mil|Absolute=True">Text "C2" (90.449mm,70.358mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3461.472mil|Location2.X=3528.528mil|Location1.Y=2747.472mil|Location2.Y=2814.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3461.472mil|Location2.X=3528.528mil|Location1.Y=2747.472mil|Location2.Y=2814.528mil|Absolute=True">Pad LED3-2(88.773mm,70.637mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3282.016mil|Location2.X=3348mil|Location1.Y=3092mil|Location2.Y=3182.976mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3282.016mil|Location2.X=3348mil|Location1.Y=3092mil|Location2.Y=3182.976mil|Absolute=True">Text "19" (84.836mm,78.74mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3309.079mil|Location2.X=3336.764mil|Location1.Y=3171.732mil|Location2.Y=3199.417mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3309.079mil|Location2.X=3336.764mil|Location1.Y=3171.732mil|Location2.Y=3199.417mil|Absolute=True">Pad USB1-0(84.402mm,80.914mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3104.417mil|Location2.X=3112.291mil|Location1.Y=3313.488mil|Location2.Y=3359.787mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3104.417mil|Location2.X=3112.291mil|Location1.Y=3313.488mil|Location2.Y=3359.787mil|Absolute=True">Track (78.952mm,84.263mm)(78.952mm,85.239mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3101.401mil|Location2.X=3168.456mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3101.401mil|Location2.X=3168.456mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True">Pad USB1-6(79.627mm,83.089mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3104.417mil|Location2.X=3112.291mil|Location1.Y=3155.063mil|Location2.Y=3231.362mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3104.417mil|Location2.X=3112.291mil|Location1.Y=3155.063mil|Location2.Y=3231.362mil|Absolute=True">Track (78.952mm,80.239mm)(78.952mm,81.977mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3101.401mil|Location2.X=3168.456mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3101.401mil|Location2.X=3168.456mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True">Pad USB1-6(79.627mm,83.089mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3376.071mil|Location2.X=3383.945mil|Location1.Y=3313.488mil|Location2.Y=3359.787mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3376.071mil|Location2.X=3383.945mil|Location1.Y=3313.488mil|Location2.Y=3359.787mil|Absolute=True">Track (85.852mm,84.263mm)(85.852mm,85.239mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3319.905mil|Location2.X=3386.961mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3319.905mil|Location2.X=3386.961mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True">Pad USB1-6(85.177mm,83.089mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3376.071mil|Location2.X=3383.945mil|Location1.Y=3155.063mil|Location2.Y=3231.362mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3376.071mil|Location2.X=3383.945mil|Location1.Y=3155.063mil|Location2.Y=3231.362mil|Absolute=True">Track (85.852mm,80.239mm)(85.852mm,81.977mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3319.905mil|Location2.X=3386.961mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3319.905mil|Location2.X=3386.961mil|Location1.Y=3221.93mil|Location2.Y=3320.481mil|Absolute=True">Pad USB1-6(85.177mm,83.089mm)  Multi-Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3104.417mil|Location2.X=3112.291mil|Location1.Y=3155.063mil|Location2.Y=3231.362mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3104.417mil|Location2.X=3112.291mil|Location1.Y=3155.063mil|Location2.Y=3231.362mil|Absolute=True">Track (78.952mm,80.239mm)(78.952mm,81.977mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3080.488mil|Location2.X=3149.512mil|Location1.Y=3128.551mil|Location2.Y=3197.575mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3080.488mil|Location2.X=3149.512mil|Location1.Y=3128.551mil|Location2.Y=3197.575mil|Absolute=True">Pad USB1-6(79.121mm,80.342mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3104.417mil|Location2.X=3178.118mil|Location1.Y=3155.063mil|Location2.Y=3162.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3104.417mil|Location2.X=3178.118mil|Location1.Y=3155.063mil|Location2.Y=3162.937mil|Absolute=True">Track (78.952mm,80.239mm)(80.624mm,80.239mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3080.488mil|Location2.X=3149.512mil|Location1.Y=3128.551mil|Location2.Y=3197.575mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3080.488mil|Location2.X=3149.512mil|Location1.Y=3128.551mil|Location2.Y=3197.575mil|Absolute=True">Pad USB1-6(79.121mm,80.342mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3376.071mil|Location2.X=3383.945mil|Location1.Y=3155.063mil|Location2.Y=3231.362mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3376.071mil|Location2.X=3383.945mil|Location1.Y=3155.063mil|Location2.Y=3231.362mil|Absolute=True">Track (85.852mm,80.239mm)(85.852mm,81.977mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3338.488mil|Location2.X=3407.512mil|Location1.Y=3128.551mil|Location2.Y=3197.575mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3338.488mil|Location2.X=3407.512mil|Location1.Y=3128.551mil|Location2.Y=3197.575mil|Absolute=True">Pad USB1-6(85.674mm,80.342mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3310.244mil|Location2.X=3383.945mil|Location1.Y=3155.063mil|Location2.Y=3162.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3310.244mil|Location2.X=3383.945mil|Location1.Y=3155.063mil|Location2.Y=3162.937mil|Absolute=True">Track (84.18mm,80.239mm)(85.852mm,80.239mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3338.488mil|Location2.X=3407.512mil|Location1.Y=3128.551mil|Location2.Y=3197.575mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3338.488mil|Location2.X=3407.512mil|Location1.Y=3128.551mil|Location2.Y=3197.575mil|Absolute=True">Pad USB1-6(85.674mm,80.342mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3310.244mil|Location2.X=3383.945mil|Location1.Y=3155.063mil|Location2.Y=3162.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3310.244mil|Location2.X=3383.945mil|Location1.Y=3155.063mil|Location2.Y=3162.937mil|Absolute=True">Track (84.18mm,80.239mm)(85.852mm,80.239mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3283.488mil|Location2.X=3307.236mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3283.488mil|Location2.X=3307.236mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-5(83.702mm,80.239mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3104.417mil|Location2.X=3178.118mil|Location1.Y=3155.063mil|Location2.Y=3162.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3104.417mil|Location2.X=3178.118mil|Location1.Y=3155.063mil|Location2.Y=3162.937mil|Absolute=True">Track (78.952mm,80.239mm)(80.624mm,80.239mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.126mil|Location2.X=3204.874mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3181.126mil|Location2.X=3204.874mil|Location1.Y=3123.504mil|Location2.Y=3194.496mil|Absolute=True">Pad USB1-1(81.102mm,80.239mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3617.063mil|Location2.X=3624.937mil|Location1.Y=3233.441mil|Location2.Y=3288.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3617.063mil|Location2.X=3624.937mil|Location1.Y=3233.441mil|Location2.Y=3288.559mil|Absolute=True">Track (91.973mm,82.229mm)(91.973mm,83.429mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3557.945mil|Location2.X=3613.189mil|Location1.Y=3229.441mil|Location2.Y=3292.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3557.945mil|Location2.X=3613.189mil|Location1.Y=3229.441mil|Location2.Y=3292.559mil|Absolute=True">Pad R2-2(91.073mm,82.829mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3617.063mil|Location2.X=3624.937mil|Location1.Y=3233.441mil|Location2.Y=3288.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3617.063mil|Location2.X=3624.937mil|Location1.Y=3233.441mil|Location2.Y=3288.559mil|Absolute=True">Track (91.973mm,82.229mm)(91.973mm,83.429mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3628.811mil|Location2.X=3684.055mil|Location1.Y=3229.441mil|Location2.Y=3292.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3628.811mil|Location2.X=3684.055mil|Location1.Y=3229.441mil|Location2.Y=3292.559mil|Absolute=True">Pad R2-1(92.873mm,82.829mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3506.441mil|Location2.X=3561.559mil|Location1.Y=2549.063mil|Location2.Y=2556.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3506.441mil|Location2.X=3561.559mil|Location1.Y=2549.063mil|Location2.Y=2556.937mil|Absolute=True">Track (89.164mm,64.846mm)(90.364mm,64.846mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3502.441mil|Location2.X=3565.559mil|Location1.Y=2560.811mil|Location2.Y=2616.055mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3502.441mil|Location2.X=3565.559mil|Location1.Y=2560.811mil|Location2.Y=2616.055mil|Absolute=True">Pad R3-2(89.764mm,65.746mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3506.441mil|Location2.X=3561.559mil|Location1.Y=2549.063mil|Location2.Y=2556.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3506.441mil|Location2.X=3561.559mil|Location1.Y=2549.063mil|Location2.Y=2556.937mil|Absolute=True">Track (89.164mm,64.846mm)(90.364mm,64.846mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3502.441mil|Location2.X=3565.559mil|Location1.Y=2489.945mil|Location2.Y=2545.189mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3502.441mil|Location2.X=3565.559mil|Location1.Y=2489.945mil|Location2.Y=2545.189mil|Absolute=True">Pad R3-1(89.764mm,63.946mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4924.063mil|Location2.X=4931.937mil|Location1.Y=2617.441mil|Location2.Y=2672.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4924.063mil|Location2.X=4931.937mil|Location1.Y=2617.441mil|Location2.Y=2672.559mil|Absolute=True">Track (125.171mm,66.583mm)(125.171mm,67.783mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4864.945mil|Location2.X=4920.189mil|Location1.Y=2613.441mil|Location2.Y=2676.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4864.945mil|Location2.X=4920.189mil|Location1.Y=2613.441mil|Location2.Y=2676.559mil|Absolute=True">Pad R1-2(124.271mm,67.183mm)  Bottom Layer</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4924.063mil|Location2.X=4931.937mil|Location1.Y=2617.441mil|Location2.Y=2672.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4924.063mil|Location2.X=4931.937mil|Location1.Y=2617.441mil|Location2.Y=2672.559mil|Absolute=True">Track (125.171mm,66.583mm)(125.171mm,67.783mm)  Bottom Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4935.811mil|Location2.X=4991.055mil|Location1.Y=2613.441mil|Location2.Y=2676.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4935.811mil|Location2.X=4991.055mil|Location1.Y=2613.441mil|Location2.Y=2676.559mil|Absolute=True">Pad R1-1(126.071mm,67.183mm)  Bottom Layer</acronym></a></td>
+</tr>
+</table></a><a href="#top">Back to top</a><br><br><a name="IDQ52TZ5KX5VDLDEUAJPBCMP3QQNTMQ1R33S2FDGM0UPZXXX0RYB4F"><table>
+<tr>
+<th style="text-align : left" colspan="2" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547mil|Location2.X=3579.661mil|Location1.Y=2532mil|Location2.Y=2597.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547mil|Location2.X=3579.661mil|Location1.Y=2532mil|Location2.Y=2597.984mil|Absolute=True">Text "1" (90.297mm,64.516mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=4588.937mil|Location1.Y=2526.063mil|Location2.Y=2533.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=4588.937mil|Location1.Y=2526.063mil|Location2.Y=2533.937mil|Absolute=True">Track (91.059mm,64.262mm)(116.459mm,64.262mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547mil|Location2.X=3579.661mil|Location1.Y=2532mil|Location2.Y=2597.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547mil|Location2.X=3579.661mil|Location1.Y=2532mil|Location2.Y=2597.984mil|Absolute=True">Text "1" (90.297mm,64.516mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=3588.937mil|Location1.Y=2526.063mil|Location2.Y=2733.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=3588.937mil|Location1.Y=2526.063mil|Location2.Y=2733.937mil|Absolute=True">Track (91.059mm,64.262mm)(91.059mm,69.342mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3593mil|Location2.X=3667.314mil|Location1.Y=2738mil|Location2.Y=2803.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3593mil|Location2.X=3667.314mil|Location1.Y=2738mil|Location2.Y=2803.984mil|Absolute=True">Text "11" (91.465mm,69.748mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=4588.937mil|Location1.Y=2726.063mil|Location2.Y=2733.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=4588.937mil|Location1.Y=2726.063mil|Location2.Y=2733.937mil|Absolute=True">Track (91.059mm,69.342mm)(116.459mm,69.342mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4034mil|Location2.X=4153.968mil|Location1.Y=2736mil|Location2.Y=2815.981mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4034mil|Location2.X=4153.968mil|Location1.Y=2736mil|Location2.Y=2815.981mil|Absolute=True">Text "P4" (102.718mm,69.748mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=4588.937mil|Location1.Y=2726.063mil|Location2.Y=2733.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=4588.937mil|Location1.Y=2726.063mil|Location2.Y=2733.937mil|Absolute=True">Track (91.059mm,69.342mm)(116.459mm,69.342mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4587mil|Location2.X=4686.306mil|Location1.Y=2167mil|Location2.Y=2232.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4587mil|Location2.X=4686.306mil|Location1.Y=2167mil|Location2.Y=2232.984mil|Absolute=True">Text "20" (116.713mm,55.245mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4581.063mil|Location2.X=4588.937mil|Location1.Y=2041.063mil|Location2.Y=2248.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4581.063mil|Location2.X=4588.937mil|Location1.Y=2041.063mil|Location2.Y=2248.937mil|Absolute=True">Track (116.459mm,51.943mm)(116.459mm,57.023mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4587mil|Location2.X=4677.976mil|Location1.Y=2067mil|Location2.Y=2132.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4587mil|Location2.X=4677.976mil|Location1.Y=2067mil|Location2.Y=2132.984mil|Absolute=True">Text "10" (116.713mm,52.705mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4581.063mil|Location2.X=4588.937mil|Location1.Y=2041.063mil|Location2.Y=2248.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4581.063mil|Location2.X=4588.937mil|Location1.Y=2041.063mil|Location2.Y=2248.937mil|Absolute=True">Track (116.459mm,51.943mm)(116.459mm,57.023mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547mil|Location2.X=3579.661mil|Location1.Y=2047mil|Location2.Y=2112.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547mil|Location2.X=3579.661mil|Location1.Y=2047mil|Location2.Y=2112.984mil|Absolute=True">Text "1" (90.297mm,52.197mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=4588.937mil|Location1.Y=2041.063mil|Location2.Y=2048.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=4588.937mil|Location1.Y=2041.063mil|Location2.Y=2048.937mil|Absolute=True">Track (91.059mm,51.943mm)(116.459mm,51.943mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547mil|Location2.X=3579.661mil|Location1.Y=2167mil|Location2.Y=2232.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547mil|Location2.X=3579.661mil|Location1.Y=2167mil|Location2.Y=2232.984mil|Absolute=True">Text "1" (90.297mm,55.245mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=3588.937mil|Location1.Y=2041.063mil|Location2.Y=2248.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=3588.937mil|Location1.Y=2041.063mil|Location2.Y=2248.937mil|Absolute=True">Track (91.059mm,51.943mm)(91.059mm,57.023mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547mil|Location2.X=3579.661mil|Location1.Y=2047mil|Location2.Y=2112.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547mil|Location2.X=3579.661mil|Location1.Y=2047mil|Location2.Y=2112.984mil|Absolute=True">Text "1" (90.297mm,52.197mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=3588.937mil|Location1.Y=2041.063mil|Location2.Y=2248.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=3588.937mil|Location1.Y=2041.063mil|Location2.Y=2248.937mil|Absolute=True">Track (91.059mm,51.943mm)(91.059mm,57.023mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3182.016mil|Location2.X=3248mil|Location1.Y=2032mil|Location2.Y=2081.323mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3182.016mil|Location2.X=3248mil|Location1.Y=2032mil|Location2.Y=2081.323mil|Absolute=True">Text "2" (82.296mm,51.816mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3166.063mil|Location2.X=3373.937mil|Location1.Y=2086.063mil|Location2.Y=2093.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3166.063mil|Location2.X=3373.937mil|Location1.Y=2086.063mil|Location2.Y=2093.937mil|Absolute=True">Track (80.518mm,53.086mm)(85.598mm,53.086mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3282.016mil|Location2.X=3348mil|Location1.Y=3092mil|Location2.Y=3182.976mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3282.016mil|Location2.X=3348mil|Location1.Y=3092mil|Location2.Y=3182.976mil|Absolute=True">Text "19" (84.836mm,78.74mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3166.063mil|Location2.X=3373.937mil|Location1.Y=3086.063mil|Location2.Y=3093.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3166.063mil|Location2.X=3373.937mil|Location1.Y=3086.063mil|Location2.Y=3093.937mil|Absolute=True">Track (80.518mm,78.486mm)(85.598mm,78.486mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3182.016mil|Location2.X=3248mil|Location1.Y=3092mil|Location2.Y=3191.306mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3182.016mil|Location2.X=3248mil|Location1.Y=3092mil|Location2.Y=3191.306mil|Absolute=True">Text "20" (82.296mm,78.74mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3166.063mil|Location2.X=3373.937mil|Location1.Y=3086.063mil|Location2.Y=3093.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3166.063mil|Location2.X=3373.937mil|Location1.Y=3086.063mil|Location2.Y=3093.937mil|Absolute=True">Track (80.518mm,78.486mm)(85.598mm,78.486mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4587mil|Location2.X=4686.306mil|Location1.Y=3137mil|Location2.Y=3202.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4587mil|Location2.X=4686.306mil|Location1.Y=3137mil|Location2.Y=3202.984mil|Absolute=True">Text "20" (116.713mm,79.883mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4581.063mil|Location2.X=4588.937mil|Location1.Y=3011.063mil|Location2.Y=3218.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4581.063mil|Location2.X=4588.937mil|Location1.Y=3011.063mil|Location2.Y=3218.937mil|Absolute=True">Track (116.459mm,76.581mm)(116.459mm,81.661mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4587mil|Location2.X=4677.976mil|Location1.Y=3037mil|Location2.Y=3102.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4587mil|Location2.X=4677.976mil|Location1.Y=3037mil|Location2.Y=3102.984mil|Absolute=True">Text "10" (116.713mm,77.343mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4581.063mil|Location2.X=4588.937mil|Location1.Y=3011.063mil|Location2.Y=3218.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4581.063mil|Location2.X=4588.937mil|Location1.Y=3011.063mil|Location2.Y=3218.937mil|Absolute=True">Track (116.459mm,76.581mm)(116.459mm,81.661mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547mil|Location2.X=3579.661mil|Location1.Y=3017mil|Location2.Y=3082.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547mil|Location2.X=3579.661mil|Location1.Y=3017mil|Location2.Y=3082.984mil|Absolute=True">Text "1" (90.297mm,76.835mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=4588.937mil|Location1.Y=3011.063mil|Location2.Y=3018.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=4588.937mil|Location1.Y=3011.063mil|Location2.Y=3018.937mil|Absolute=True">Track (91.059mm,76.581mm)(116.459mm,76.581mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4027mil|Location2.X=4146.968mil|Location1.Y=2933mil|Location2.Y=3012.981mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4027mil|Location2.X=4146.968mil|Location1.Y=2933mil|Location2.Y=3012.981mil|Absolute=True">Text "P3" (102.54mm,74.752mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=4588.937mil|Location1.Y=3011.063mil|Location2.Y=3018.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=4588.937mil|Location1.Y=3011.063mil|Location2.Y=3018.937mil|Absolute=True">Track (91.059mm,76.581mm)(116.459mm,76.581mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547mil|Location2.X=3579.661mil|Location1.Y=3017mil|Location2.Y=3082.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3547mil|Location2.X=3579.661mil|Location1.Y=3017mil|Location2.Y=3082.984mil|Absolute=True">Text "1" (90.297mm,76.835mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=3588.937mil|Location1.Y=3011.063mil|Location2.Y=3218.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=3588.937mil|Location1.Y=3011.063mil|Location2.Y=3218.937mil|Absolute=True">Track (91.059mm,76.581mm)(91.059mm,81.661mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3582mil|Location2.X=3656.314mil|Location1.Y=3222mil|Location2.Y=3287.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3582mil|Location2.X=3656.314mil|Location1.Y=3222mil|Location2.Y=3287.984mil|Absolute=True">Text "11" (91.186mm,82.042mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=3588.937mil|Location1.Y=3011.063mil|Location2.Y=3218.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=3588.937mil|Location1.Y=3011.063mil|Location2.Y=3218.937mil|Absolute=True">Track (91.059mm,76.581mm)(91.059mm,81.661mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3582mil|Location2.X=3656.314mil|Location1.Y=3222mil|Location2.Y=3287.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3582mil|Location2.X=3656.314mil|Location1.Y=3222mil|Location2.Y=3287.984mil|Absolute=True">Text "11" (91.186mm,82.042mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=4588.937mil|Location1.Y=3211.063mil|Location2.Y=3218.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3581.063mil|Location2.X=4588.937mil|Location1.Y=3211.063mil|Location2.Y=3218.937mil|Absolute=True">Track (91.059mm,81.661mm)(116.459mm,81.661mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5042mil|Location2.X=5107.984mil|Location1.Y=1937.024mil|Location2.Y=2028mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5042mil|Location2.X=5107.984mil|Location1.Y=1937.024mil|Location2.Y=2028mil|Absolute=True">Text "10" (128.27mm,51.308mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4916.063mil|Location2.X=5123.937mil|Location1.Y=2026.063mil|Location2.Y=2033.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4916.063mil|Location2.X=5123.937mil|Location1.Y=2026.063mil|Location2.Y=2033.937mil|Absolute=True">Track (124.968mm,51.562mm)(130.048mm,51.562mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4942mil|Location2.X=5007.984mil|Location1.Y=1978.677mil|Location2.Y=2028mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4942mil|Location2.X=5007.984mil|Location1.Y=1978.677mil|Location2.Y=2028mil|Absolute=True">Text "9" (125.73mm,51.308mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4916.063mil|Location2.X=5123.937mil|Location1.Y=2026.063mil|Location2.Y=2033.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4916.063mil|Location2.X=5123.937mil|Location1.Y=2026.063mil|Location2.Y=2033.937mil|Absolute=True">Track (124.968mm,51.562mm)(130.048mm,51.562mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5042mil|Location2.X=5107.984mil|Location1.Y=2538.677mil|Location2.Y=2588mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5042mil|Location2.X=5107.984mil|Location1.Y=2538.677mil|Location2.Y=2588mil|Absolute=True">Text "2" (128.27mm,65.532mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4916.063mil|Location2.X=5123.937mil|Location1.Y=2526.063mil|Location2.Y=2533.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4916.063mil|Location2.X=5123.937mil|Location1.Y=2526.063mil|Location2.Y=2533.937mil|Absolute=True">Track (124.968mm,64.262mm)(130.048mm,64.262mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4942mil|Location2.X=5007.984mil|Location1.Y=2535.339mil|Location2.Y=2568mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4942mil|Location2.X=5007.984mil|Location1.Y=2535.339mil|Location2.Y=2568mil|Absolute=True">Text "1" (125.73mm,65.024mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4916.063mil|Location2.X=5123.937mil|Location1.Y=2526.063mil|Location2.Y=2533.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4916.063mil|Location2.X=5123.937mil|Location1.Y=2526.063mil|Location2.Y=2533.937mil|Absolute=True">Track (124.968mm,64.262mm)(130.048mm,64.262mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4862.409mil|Location2.X=4904.394mil|Location1.Y=2601.094mil|Location2.Y=2643.078mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4862.409mil|Location2.X=4904.394mil|Location1.Y=2601.094mil|Location2.Y=2643.078mil|Absolute=True">Text "+" (124.422mm,67.176mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4850.063mil|Location2.X=4857.937mil|Location1.Y=2568.063mil|Location2.Y=2675.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4850.063mil|Location2.X=4857.937mil|Location1.Y=2568.063mil|Location2.Y=2675.937mil|Absolute=True">Track (123.292mm,65.329mm)(123.292mm,67.869mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3473.922mil|Location2.X=3515.906mil|Location1.Y=3317.409mil|Location2.Y=3359.394mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3473.922mil|Location2.X=3515.906mil|Location1.Y=3317.409mil|Location2.Y=3359.394mil|Absolute=True">Text "+" (88.196mm,85.179mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.063mil|Location2.X=3548.937mil|Location1.Y=3305.063mil|Location2.Y=3312.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.063mil|Location2.X=3548.937mil|Location1.Y=3305.063mil|Location2.Y=3312.937mil|Absolute=True">Track (87.503mm,84.049mm)(90.043mm,84.049mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3474.094mil|Location2.X=3516.079mil|Location1.Y=2580.606mil|Location2.Y=2622.591mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3474.094mil|Location2.X=3516.079mil|Location1.Y=2580.606mil|Location2.Y=2622.591mil|Absolute=True">Text "+" (89.35mm,65.697mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.063mil|Location2.X=3548.937mil|Location1.Y=2627.063mil|Location2.Y=2634.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.063mil|Location2.X=3548.937mil|Location1.Y=2627.063mil|Location2.Y=2634.937mil|Absolute=True">Track (87.503mm,66.827mm)(90.043mm,66.827mm)  Top Overlay</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td style="width:50%; text-align:left" class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3582mil|Location2.X=3656.314mil|Location1.Y=3222mil|Location2.Y=3287.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3582mil|Location2.X=3656.314mil|Location1.Y=3222mil|Location2.Y=3287.984mil|Absolute=True">Text "11" (91.186mm,82.042mm)  Top Overlay</acronym></a></td>
+<td style="width:50%; text-align:left" class="column2"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3564mil|Location2.X=3803.929mil|Location1.Y=3289mil|Location2.Y=3368.981mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3564mil|Location2.X=3803.929mil|Location1.Y=3289mil|Location2.Y=3368.981mil|Absolute=True">Text "LED2" (90.78mm,83.795mm)  Top Overlay</acronym></a></td>
+</tr>
+</table></a><a href="#top">Back to top</a><br><br><a name="ID3NH1YPPASN2LEKAHYZBUFGVFIHAITXTPBSHQ5HI13FSBV4JE0YJP"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Room PinBoardJTAG20_10 (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('PinBoardJTAG20_10'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4489.37mil|Location1.Y=0mil|Location2.Y=3006.921mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4489.37mil|Location1.Y=0mil|Location2.Y=3006.921mil|Absolute=True">Room Definition Between Component on BottomLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4005.528mil|Location1.Y=0mil|Location2.Y=3006.921mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4005.528mil|Location1.Y=0mil|Location2.Y=3006.921mil|Absolute=True">Room Definition Between Component on BottomLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=5141.103mil|Location1.Y=0mil|Location2.Y=3283.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=5141.103mil|Location1.Y=0mil|Location2.Y=3283.937mil|Absolute=True">Room Definition Between Component on TopLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4584.622mil|Location1.Y=0mil|Location2.Y=2985.071mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4584.622mil|Location1.Y=0mil|Location2.Y=2985.071mil|Absolute=True">Room Definition Between Component on BottomLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4584.622mil|Location1.Y=0mil|Location2.Y=2841.071mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4584.622mil|Location1.Y=0mil|Location2.Y=2841.071mil|Absolute=True">Room Definition Between Component on BottomLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3631.622mil|Location1.Y=0mil|Location2.Y=2841.071mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3631.622mil|Location1.Y=0mil|Location2.Y=2841.071mil|Absolute=True">Room Definition Between Component on BottomLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3631.622mil|Location1.Y=0mil|Location2.Y=2985.071mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3631.622mil|Location1.Y=0mil|Location2.Y=2985.071mil|Absolute=True">Room Definition Between Component on BottomLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3373.937mil|Location1.Y=0mil|Location2.Y=3191.306mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3373.937mil|Location1.Y=0mil|Location2.Y=3191.306mil|Absolute=True">Room Definition Between Component on TopLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=5123.937mil|Location1.Y=0mil|Location2.Y=2588mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=5123.937mil|Location1.Y=0mil|Location2.Y=2588mil|Absolute=True">Room Definition Between Component on TopLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4686.306mil|Location1.Y=0mil|Location2.Y=3287.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4686.306mil|Location1.Y=0mil|Location2.Y=3287.984mil|Absolute=True">Room Definition Between Component on TopLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4588.937mil|Location1.Y=0mil|Location2.Y=2812.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4588.937mil|Location1.Y=0mil|Location2.Y=2812.984mil|Absolute=True">Room Definition Between Component on TopLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4686.306mil|Location1.Y=0mil|Location2.Y=2248.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4686.306mil|Location1.Y=0mil|Location2.Y=2248.937mil|Absolute=True">Room Definition Between Component on TopLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4904.394mil|Location1.Y=0mil|Location2.Y=2675.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4904.394mil|Location1.Y=0mil|Location2.Y=2675.937mil|Absolute=True">Room Definition Between Component on TopLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3548.937mil|Location1.Y=0mil|Location2.Y=3359.394mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3548.937mil|Location1.Y=0mil|Location2.Y=3359.394mil|Absolute=True">Room Definition Between Component on TopLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3548.937mil|Location1.Y=0mil|Location2.Y=2834.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3548.937mil|Location1.Y=0mil|Location2.Y=2834.937mil|Absolute=True">Room Definition Between Component on TopLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4998.866mil|Location1.Y=0mil|Location2.Y=2684.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4998.866mil|Location1.Y=0mil|Location2.Y=2684.37mil|Absolute=True">Room Definition Between Component on BottomLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3691.866mil|Location1.Y=0mil|Location2.Y=3300.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3691.866mil|Location1.Y=0mil|Location2.Y=3300.37mil|Absolute=True">Room Definition Between Component on BottomLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3573.37mil|Location1.Y=0mil|Location2.Y=2623.866mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3573.37mil|Location1.Y=0mil|Location2.Y=2623.866mil|Absolute=True">Room Definition Between Component on BottomLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3407.512mil|Location1.Y=0mil|Location2.Y=3359.787mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Niu\Desktop\PinBoardJTAG20_10.pcb;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3407.512mil|Location1.Y=0mil|Location2.Y=3359.787mil|Absolute=True">Room Definition Between Component on BottomLayer And Rule on TopLayer</acronym></a><br></td>
+</tr>
+</table></a><a href="#top">Back to top</a><br><br></body>
+</html>

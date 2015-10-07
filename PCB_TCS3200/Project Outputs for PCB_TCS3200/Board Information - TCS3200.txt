@@ -1,0 +1,12 @@
+Board Information Report
+Filename     : C:\Users\Public\Documents\Altium\Projects\PCB_TCS3200\TCS3200.PcbDoc
+Date         : 2015/9/1 ÐÇÆÚ¶þ
+Time         : 19:03:00
+Time Elapsed : 00:00:00
+
+Routing Information
+    Routing completion, 100.00%
+    Connections, 44
+    Connections routed, 44
+    Connections remaining, 0
+count : 4

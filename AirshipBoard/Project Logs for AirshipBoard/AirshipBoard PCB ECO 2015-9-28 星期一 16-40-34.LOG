@@ -1,0 +1,8 @@
+Removed Pin From Net: NetName=MPU_SCL Pin=P3-1
+Removed Pin From Net: NetName=MPU_SDA Pin=P3-2
+Removed Pin From Net: NetName=BLERX Pin=P4-1
+Removed Pin From Net: NetName=BLETX Pin=P4-2
+Removed Member From Class: ClassName=AirshipBoard Member=P3
+Removed Member From Class: ClassName=AirshipBoard Member=P4
+Added Member To Class: ClassName=AirshipBoard Member=Component BT1 VBAT
+Added Room: Name=AirshipBoard

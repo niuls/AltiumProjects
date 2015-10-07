@@ -1,0 +1,78 @@
+Added Pin To Net: NetName=3.3V Pin=C18-1
+Added Pin To Net: NetName=BLETX Pin=J2-20
+Added Pin To Net: NetName=BLERX Pin=J2-21
+Added Pin To Net: NetName=3.3V Pin=J3-1
+Added Pin To Net: NetName=MPU_SDA Pin=J3-2
+Added Pin To Net: NetName=MPU_SCL Pin=J3-3
+Added Pin To Net: NetName=GND Pin=J3-5
+Added Pin To Net: NetName=A13 Pin=P1-2
+Added Pin To Net: NetName=A14 Pin=P1-4
+Added Pin To Net: NetName=B3 Pin=P1-6
+Added Pin To Net: NetName=A15 Pin=P1-8
+Added Pin To Net: NetName=NRST Pin=P1-10
+Added Pin To Net: NetName=VIN Pin=P2-1
+Added Pin To Net: NetName=GND Pin=P2-2
+Added Pin To Net: NetName=MPU_SCL Pin=P3-1
+Added Pin To Net: NetName=MPU_SDA Pin=P3-2
+Added Pin To Net: NetName=BLERX Pin=P4-1
+Added Pin To Net: NetName=BLETX Pin=P4-2
+Added Pin To Net: NetName=MPU_SCL Pin=R23-2
+Added Pin To Net: NetName=MPU_SDA Pin=R24-2
+Added Pin To Net: NetName=VCC Pin=S3-5
+Added Pin To Net: NetName=VIN Pin=S3-6
+Added Pin To Net: NetName=A14 Pin=U1-37
+Added Pin To Net: NetName=A15 Pin=U1-38
+Added Pin To Net: NetName=B3 Pin=U1-39
+Added Pin To Net: NetName=B4 Pin=U1-40
+Added Pin To Net: NetName=MPU_INT Pin=U1-41
+Added Pin To Net: NetName=MPU_SCL Pin=U1-42
+Added Pin To Net: NetName=MPU_SDA Pin=U1-43
+Added Pin To Net: NetName=B8 Pin=U1-45
+Added Pin To Net: NetName=B9 Pin=U1-46
+Added Pin To Net: NetName=GND Pin=U1-47
+Added Pin To Net: NetName=3.3V Pin=U1-48
+Added Pin To Net: NetName=3.3V Pin=U3-13
+Added Pin To Net: NetName=GND Pin=U3-15
+Added Pin To Net: NetName=GND Pin=U3-17
+Added Pin To Net: NetName=GND Pin=U3-18
+Added Pin To Net: NetName=MPU_SCL Pin=U3-23
+Added Pin To Net: NetName=MPU_SDA Pin=U3-24
+Added Pin To Net: NetName=GND Pin=U4-5
+Added Pin To Net: NetName=MPU_SDA Pin=U4-7
+Added Pin To Net: NetName=MPU_SCL Pin=U4-8
+Added Pin To Net: NetName=GND Pin=U6-1
+Added Pin To Net: NetName=VCCM Pin=U6-3
+Added Pin To Net: NetName=GND Pin=U8-1
+Added Pin To Net: NetName=VCCM Pin=U8-3
+Added Pin To Net: NetName=GND Pin=U10-1
+Added Pin To Net: NetName=VCCM Pin=U10-3
+Added Pin To Net: NetName=VCC Pin=USB1-1
+Added Pin To Net: NetName=GND Pin=USB1-4
+Added Pin To Net: NetName=GND Pin=USB1-6
+Added Pin To Net: NetName=GND Pin=USB1-6
+Added Pin To Net: NetName=GND Pin=USB1-6
+Added Pin To Net: NetName=GND Pin=USB1-6
+Added Pin To Net: NetName=GND Pin=USB1-6
+Added Pin To Net: NetName=GND Pin=USB1-6
+Added Pin To Net: NetName=GND Pin=USB1-6
+Added Pin To Net: NetName=GND Pin=USB1-6
+Added Pin To Net: NetName=GND Pin=USB1-6
+Added Pin To Net: NetName=BLEP0.0 Pin=J2-23
+Added Net: Name=BLEP0.0
+Added Pin To Net: NetName=BLEP0.1 Pin=J2-22
+Added Net: Name=BLEP0.1
+Added Pin To Net: NetName=BLEP0.4 Pin=J2-19
+Added Net: Name=BLEP0.4
+Added Pin To Net: NetName=BLEP0.5 Pin=J2-18
+Added Net: Name=BLEP0.5
+Added Pin To Net: NetName=BLERST Pin=J2-24
+Added Net: Name=BLERST
+Added Pin To Net: NetName=BOOT0 Pin=R5-2
+Added Pin To Net: NetName=BOOT0 Pin=U1-44
+Added Net: Name=BOOT0
+Added Pin To Net: NetName=MPU_CLKOUT Pin=U3-22
+Added Net: Name=MPU_CLKOUT
+Added Pin To Net: NetName=MPU_SDO Pin=U4-6
+Added Net: Name=MPU_SDO
+Added Pin To Net: NetName=SFR_MODE Pin=J3-4
+Added Net: Name=SFR_MODE

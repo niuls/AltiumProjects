@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [PCB_TCS3200.PrjPcb]
+   Generated File[TCS3200.TXT]
+   Generated File[TCS3200.LDP]
+   Generated File[TCS3200.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 12:51:05 On 2015/9/9 ÐÇÆÚÈý

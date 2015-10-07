@@ -1,0 +1,30 @@
+Added Component: Designator=C3(1608[0603])
+Added Component: Designator=C4(1608[0603])
+Added Component: Designator=J1(KLD-0202)
+Added Component: Designator=P6(HDR1X2)
+Added Component: Designator=U2(AMS1117-SOT223)
+Added Pin To Net: NetName=GND Pin=C3-1
+Added Pin To Net: NetName=GND Pin=C4-1
+Added Pin To Net: NetName=5V Pin=C4-2
+Added Pin To Net: NetName=GND Pin=J1-2A
+Added Pin To Net: NetName=GND Pin=J1-2B
+Added Pin To Net: NetName=GND Pin=J1-2
+Added Pin To Net: NetName=GND Pin=J1-3A
+Added Pin To Net: NetName=GND Pin=J1-3B
+Added Pin To Net: NetName=GND Pin=J1-3
+Added Pin To Net: NetName=GND Pin=P6-1
+Added Pin To Net: NetName=GND Pin=U2-1
+Added Pin To Net: NetName=5V Pin=U2-2
+Added Pin To Net: NetName=VIN Pin=C3-2
+Added Pin To Net: NetName=VIN Pin=J1-1
+Added Pin To Net: NetName=VIN Pin=J1-1A
+Added Pin To Net: NetName=VIN Pin=J1-1B
+Added Pin To Net: NetName=VIN Pin=P6-2
+Added Pin To Net: NetName=VIN Pin=U2-3
+Added Net: Name=VIN
+Added Member To Class: ClassName=PinBoardJTAG20_10 Member=Component C3 Cap Semi
+Added Member To Class: ClassName=PinBoardJTAG20_10 Member=Component C4 Cap Semi
+Added Member To Class: ClassName=PinBoardJTAG20_10 Member=Component J1 PWR2.5
+Added Member To Class: ClassName=PinBoardJTAG20_10 Member=Component P6 Header 2
+Added Member To Class: ClassName=PinBoardJTAG20_10 Member=Component U2 AMS1117-5.0
+Added Room: Name=PinBoardJTAG20_10

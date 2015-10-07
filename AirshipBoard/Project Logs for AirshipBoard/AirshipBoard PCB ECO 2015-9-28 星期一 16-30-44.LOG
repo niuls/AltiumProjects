@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=VBAT Pin=BT1-1
+Removed Pin From Net: NetName=GND Pin=BT1-2
+Removed Member From Class: ClassName=AirshipBoard Member=BT1
+Added Room: Name=AirshipBoard

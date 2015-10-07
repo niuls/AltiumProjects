@@ -1,0 +1,3 @@
+Added Component: Designator=BT1(BAT-SOT)
+Added Pin To Net: NetName=VBAT Pin=BT1-1
+Added Member To Class: ClassName=AirshipBoard Member=Component BT1 VBAT
