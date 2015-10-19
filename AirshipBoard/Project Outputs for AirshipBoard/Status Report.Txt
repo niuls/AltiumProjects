@@ -1,10 +1,9 @@
-Output: Report Single Pin Nets
-Type  : SinglePinNetReporter
+Output: Bill of Materials
+Type  : BOM
 From  : Variant [[No Variations]] of Project [AirshipBoard.PrjPcb]
-   Generated File[AirshipBoard.REP]
 
 
-Files Generated   : 1
+Files Generated   : 0
 Documents Printed : 0
 
-Finished Output Generation At 12:15:12 On 2015/9/30
+Finished Output Generation At 16:39:51 On 2015/10/8 ÐÇÆÚËÄ
