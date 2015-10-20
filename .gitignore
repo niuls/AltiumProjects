@@ -1,3 +1,5 @@
 *.PcbDocPreview
 *.SchDocPreview
 Report.Txt
+*.SchDoc.Zip
+*.PcbDoc.Zip
