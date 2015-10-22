@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=3.3V Pin=J1-1
+Removed Pin From Net: NetName=GND Pin=J1-3
+Removed Member From Class: ClassName=Four-Axis Member=J1
+Added Pin To Net: NetName=GND Pin=R5-1
+Added Room: Name=Four-Axis
