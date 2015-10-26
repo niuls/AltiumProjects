@@ -1,5 +1,0 @@
-Removed Pin From Net: NetName=GND Pin=U1-1
-Removed Pin From Net: NetName=3.3V Pin=U1-2
-Removed Pin From Net: NetName=5V Pin=U1-3
-Removed Member From Class: ClassName=PinBoardJTAG20_10 Member=U1
-Added Room: Name=PinBoardJTAG20_10

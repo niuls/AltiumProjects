@@ -1,6 +1,0 @@
-DRC Rules Export File for PCB: C:\Users\Niu\Desktop\TCS3200.pcb
-RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0
-RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=10.00
-RuleKind=Width|RuleName=Power|Scope=Board|Minimum=19.69
-RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=4.00
-RuleKind=Width|RuleName=Normal|Scope=Board|Minimum=10.00
