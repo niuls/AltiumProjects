@@ -70,18 +70,6 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=EMSEWXWT
 
-[GeneratedDocument1]
-DocumentPath=Project Outputs for AirshipBoard\AirshipBoard.REP
-DItemRevisionGUID=
-
-[GeneratedDocument2]
-DocumentPath=Project Outputs for AirshipBoard\Board Information - AirshipBoard.html
-DItemRevisionGUID=
-
-[GeneratedDocument3]
-DocumentPath=Project Outputs for AirshipBoard\Net Status - AirshipBoard.html
-DItemRevisionGUID=
-
 [Configuration1]
 Name=Default Configuration
 ParameterCount=0
