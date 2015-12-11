@@ -1,0 +1,24 @@
+Field=Comment~String~Comment~100|Field=Designator~String~Designator~100|Field=Footprint~String~Footprint~100|Field=Value~String~Value~100|ReportField=Currency~<none>|ReportField=ProductionQuantity~1|ReportField=ProjectFileName~US_Driver.PrjPcb|ReportField=ProjectFullPath~C:\Documents\Altium\Projects\US_Driver\US_Driver.PrjPcb|ReportField=Title~Bill of Materials For Project [US_Driver.PrjPcb] (No PCB Document Selected)|ReportField=TotalQuantity~67|ReportField=ReportTime~11:13:00|ReportField=ReportDate~2015/12/10 星期四|ReportField=ReportDateTime~2015/12/10 星期四 11:13:00|ReportField=OutputName~Bill of Materials|ReportField=OutputType~BOM_PartType|ReportField=GeneratorName~BOM|ReportField=GeneratorDescription~Bill of Materials|ReportField=VariantName~None|ReportField=Address1~|ReportField=Address2~|ReportField=Address3~|ReportField=Address4~|ReportField=Application_BuildNumber~|ReportField=ApprovedBy~|ReportField=Author~Niu|ReportField=CheckedBy~|ReportField=CompanyName~|ReportField=CurrentDate~2015/12/10 星期四|ReportField=CurrentTime~11:00:19|ReportField=Date~|ReportField=DocumentFullPathAndName~C:\Documents\Altium\Projects\US_Driver\US_Driver.SchDoc|ReportField=DocumentName~US_Driver.SchDoc|ReportField=DocumentNumber~|ReportField=DrawnBy~|ReportField=Engineer~|ReportField=ImagePath~|ReportField=ModifiedDate~2015/12/10 星期四|ReportField=Organization~LD|ReportField=ProjectName~US_Driver.PrjPcb|ReportField=Revision~0.5|ReportField=Rule~|ReportField=SheetNumber~|ReportField=SheetTotal~|ReportField=Time~|ReportField=Title~超声波驱动电源板|ReportField=DataSourceFileName~US_Driver.PrjPcb|ReportField=DataSourceFullPath~C:\Documents\Altium\Projects\US_Driver\US_Driver.PrjPcb
+BRIDGE|BR1|GBU4M|
+BRIDGE|BR2|BR_CIRCLE|
+Cap Pol3|C1, C2, C3, C4, C6, C7|RB7.6-15|0.47μF, 0.47μF, 0.47μF, 0.47μF, 0.1μF, 0.1μF
+Cap Semi|C5, C10, C13, C15, C21|瓷片电容|2μF, 2μF, 2μF, 0.1μF, 0.1μF
+Cap Pol1|C8, C12, C14, C16, C20, C22, C25|RB7.6-15|470μF, 10μF, 10μF, 10μF, 10μF, 10μF, 22μF
+Cap Pol1|C9, C11|Cap_450V|220μF
+Cap|C17, C18, C23, C24|瓷片电容|1nF/630V
+Cap|C19|Cap_20|1μF/630V
+1N4007|D1, D2, D3, D4, D5, D6|DO-41|
+Fuse|F1, F2|FUSE|250V/2A
+Inductor|L1, L2, L3|工字电感8*10|800μH, 20μH, 800nH
+LED1|LED1|BAT-2|
+POWR|P1|CH3.96-3P|
+Header 4X2A|P2|HDR2X4_CEN|
+US|P3|CH3.96-3P|
+MOSFET-N|Q1, Q2, Q3, Q4|TO-247|IRFP460
+Res2|R1, R2, R3, R4, R5, R6, R7, R8, R11, R12|AXIAL-0.4|4.7K, 4.7K, 4.7K, 4.7K, 4.7K, 1K, 24Ω, 24Ω, 24Ω, 24Ω
+Res2|R9, R10, R13, R14|Res_10W_立式|300Ω/10W
+Trans|T1, T2|TRANS|15V
+IR2110|U1, U2|DIP-14|
+7815|U3|TO-220AB|
+7805|U4|TO-220AB|
+AMS1117-3.3|U5|TO-220AB|

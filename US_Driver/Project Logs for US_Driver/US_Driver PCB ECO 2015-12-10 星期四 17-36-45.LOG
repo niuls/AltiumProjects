@@ -1,0 +1,7 @@
+Removed Pin From Net: NetName=NetBR1_2 Pin=F1-2
+Removed Pin From Net: NetName=NetF1_1 Pin=P1-1
+Removed Pin From Net: NetName=NetBR1_3 Pin=P1-3
+Added Pin To Net: NetName=NetBR1_3 Pin=F1-2
+Added Pin To Net: NetName=NetBR1_2 Pin=P1-1
+Added Pin To Net: NetName=NetF1_1 Pin=P1-3
+Added Member To Class: ClassName=US_Driver Member=Component C24 Cap Pol1

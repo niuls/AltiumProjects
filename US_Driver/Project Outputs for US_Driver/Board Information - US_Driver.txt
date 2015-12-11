@@ -1,0 +1,12 @@
+Board Information Report
+Filename     : C:\Documents\Altium\Projects\US_Driver\US_Driver.PcbDoc
+Date         : 2015/12/11 ÐÇÆÚÎå
+Time         : 15:57:42
+Time Elapsed : 00:00:00
+
+Routing Information
+    Routing completion, 100.00%
+    Connections, 132
+    Connections routed, 132
+    Connections remaining, 0
+count : 4

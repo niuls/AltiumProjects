@@ -1,0 +1,15 @@
+Change Component Footprint: Designator=C19 Old Footprint=Cap_20 New Footprint=Cap_15
+Change Component Footprint: Designator=C9 Old Footprint=Cap_450V New Footprint=Cap_10*20
+Change Component Footprint: Designator=C11 Old Footprint=Cap_450V New Footprint=Cap_10*20
+Change Component Footprint: Designator=C1 Old Footprint=RB7.6-15 New Footprint=Cap_4*7
+Change Component Footprint: Designator=C2 Old Footprint=RB7.6-15 New Footprint=Cap_4*7
+Change Component Footprint: Designator=C3 Old Footprint=RB7.6-15 New Footprint=Cap_4*7
+Change Component Footprint: Designator=C4 Old Footprint=RB7.6-15 New Footprint=Cap_4*7
+Change Component Footprint: Designator=C6 Old Footprint=RB7.6-15 New Footprint=Cap_5*11
+Change Component Footprint: Designator=C7 Old Footprint=RB7.6-15 New Footprint=Cap_5*11
+Change Component Footprint: Designator=C12 Old Footprint=RB7.6-15 New Footprint=Cap_5*11
+Change Component Footprint: Designator=C14 Old Footprint=RB7.6-15 New Footprint=Cap_5*11
+Change Component Footprint: Designator=C16 Old Footprint=RB7.6-15 New Footprint=Cap_5*11
+Change Component Footprint: Designator=C20 Old Footprint=RB7.6-15 New Footprint=Cap_5*11
+Change Component Footprint: Designator=C22 Old Footprint=RB7.6-15 New Footprint=Cap_5*11
+Change Component Footprint: Designator=C25 Old Footprint=RB7.6-15 New Footprint=Cap_5*11

@@ -1,0 +1,74 @@
+Removed Pin From Net: NetName=NetBR1_3 Pin=T1-1
+Removed Pin From Net: NetName=NetBR1_2 Pin=T1-2
+Removed Pin From Net: NetName=NetBR2_2 Pin=T1-3
+Removed Pin From Net: NetName=NetBR2_4 Pin=T1-4
+Removed Pin From Net: NetName=VS_1 Pin=T2-1
+Removed Pin From Net: NetName=VS_2 Pin=T2-2
+Removed Pin From Net: NetName=NetL2_2 Pin=T2-3
+Removed Pin From Net: NetName=NetC18_1 Pin=T2-4
+Removed Member From Class: ClassName=US_Driver Member=T1
+Removed Member From Class: ClassName=US_Driver Member=T2
+Change Component Footprint: Designator=LED1 Old Footprint=BAT-2 New Footprint=LED-1
+Change Component Footprint: Designator=C1 Old Footprint=Cap_4*7 New Footprint=C0805
+Change Component Footprint: Designator=C2 Old Footprint=Cap_4*7 New Footprint=C0805
+Change Component Footprint: Designator=C3 Old Footprint=Cap_4*7 New Footprint=C0805
+Change Component Footprint: Designator=C4 Old Footprint=Cap_4*7 New Footprint=C0805
+Change Component Footprint: Designator=C6 Old Footprint=Cap_5*11 New Footprint=C0805
+Change Component Footprint: Designator=C7 Old Footprint=Cap_5*11 New Footprint=C0805
+Change Component Footprint: Designator=C12 Old Footprint=Cap_5*11 New Footprint=RB7.6-15
+Change Component Footprint: Designator=C13 Old Footprint=Cap_5*11 New Footprint=RB7.6-15
+Change Component Footprint: Designator=C17 Old Footprint=Cap_5*11 New Footprint=RB7.6-15
+Change Component Footprint: Designator=C19 Old Footprint=Cap_5*11 New Footprint=RB7.6-15
+Change Component Footprint: Designator=C21 Old Footprint=Cap_5*11 New Footprint=RB7.6-15
+Change Component Footprint: Designator=C24 Old Footprint=Cap_5*11 New Footprint=RB7.6-15
+Change Component Footprint: Designator=C8 Old Footprint=Cap_10*20 New Footprint=RB7.6-15
+Change Component Footprint: Designator=C18 Old Footprint=Cap_15 New Footprint=RAD-0.3
+Change Component Footprint: Designator=C9 Old Footprint=Cap_450V New Footprint=RB7.6-15
+Change Component Footprint: Designator=C11 Old Footprint=Cap_450V New Footprint=RB7.6-15
+Change Component Footprint: Designator=P1 Old Footprint=CH3.96-3P New Footprint=HDR1X3
+Change Component Footprint: Designator=P3 Old Footprint=CH3.96-3P New Footprint=HDR1X3
+Change Component Footprint: Designator=R9 Old Footprint=Res_10W_立式 New Footprint=AXIAL-0.4
+Change Component Footprint: Designator=R10 Old Footprint=Res_10W_立式 New Footprint=AXIAL-0.4
+Change Component Footprint: Designator=R13 Old Footprint=Res_10W_立式 New Footprint=AXIAL-0.4
+Change Component Footprint: Designator=R14 Old Footprint=Res_10W_立式 New Footprint=AXIAL-0.4
+Change Component Footprint: Designator=U5 Old Footprint=TO-220AB New Footprint=AMS1117-SOT223
+Change Component Footprint: Designator=Q1 Old Footprint=TO-247 New Footprint=E3
+Change Component Footprint: Designator=Q2 Old Footprint=TO-247 New Footprint=E3
+Change Component Footprint: Designator=Q3 Old Footprint=TO-247 New Footprint=E3
+Change Component Footprint: Designator=Q4 Old Footprint=TO-247 New Footprint=E3
+Change Component Footprint: Designator=L1 Old Footprint=工字电感8*10 New Footprint=0402-A
+Change Component Footprint: Designator=L2 Old Footprint=工字电感8*10 New Footprint=0402-A
+Change Component Footprint: Designator=L3 Old Footprint=工字电感8*10 New Footprint=0402-A
+Change Component Footprint: Designator=C5 Old Footprint=瓷片电容 New Footprint=C1206
+Change Component Footprint: Designator=C10 Old Footprint=瓷片电容 New Footprint=C1206
+Change Component Footprint: Designator=C14 Old Footprint=瓷片电容 New Footprint=C1206
+Change Component Footprint: Designator=C20 Old Footprint=瓷片电容 New Footprint=C1206
+Change Component Footprint: Designator=C15 Old Footprint=瓷片电容 New Footprint=RAD-0.3
+Change Component Footprint: Designator=C16 Old Footprint=瓷片电容 New Footprint=RAD-0.3
+Change Component Footprint: Designator=C22 Old Footprint=瓷片电容 New Footprint=RAD-0.3
+Change Component Footprint: Designator=C23 Old Footprint=瓷片电容 New Footprint=RAD-0.3
+Change Component Comment : Designator=D1 Old Comment=1N4007 New Comment=Diode 1N4007
+Change Component Comment : Designator=D2 Old Comment=1N4007 New Comment=Diode 1N4007
+Change Component Comment : Designator=D3 Old Comment=1N4007 New Comment=Diode 1N4007
+Change Component Comment : Designator=D4 Old Comment=1N4007 New Comment=Diode 1N4007
+Change Component Comment : Designator=D5 Old Comment=1N4007 New Comment=Diode 1N4007
+Change Component Comment : Designator=D6 Old Comment=1N4007 New Comment=Diode 1N4007
+Change Component Comment : Designator=P1 Old Comment=POWR New Comment=Header 3
+Change Component Comment : Designator=P3 Old Comment=US New Comment=Header 3
+Added Component: Designator=Trans2_1(Trans_Part)
+Added Component: Designator=Trans2_2(Trans_Part)
+Added Component: Designator=Trans?_1(Trans_Part)
+Added Component: Designator=Trans?_2(Trans_Part)
+Added Pin To Net: NetName=VS_2 Pin=Trans2_1-1
+Added Pin To Net: NetName=VS_1 Pin=Trans2_1-2
+Added Pin To Net: NetName=NetL2_2 Pin=Trans2_2-1
+Added Pin To Net: NetName=NetC18_1 Pin=Trans2_2-2
+Added Pin To Net: NetName=NetBR1_3 Pin=Trans?_1-1
+Added Pin To Net: NetName=NetBR1_2 Pin=Trans?_1-2
+Added Pin To Net: NetName=NetBR2_4 Pin=Trans?_2-1
+Added Pin To Net: NetName=NetBR2_2 Pin=Trans?_2-2
+Added Member To Class: ClassName=US_Driver Member=Component Trans2_1 Trans_Part
+Added Member To Class: ClassName=US_Driver Member=Component Trans2_2 Trans_Part
+Added Member To Class: ClassName=US_Driver Member=Component Trans?_1 Trans_Part
+Added Member To Class: ClassName=US_Driver Member=Component Trans?_2 Trans_Part
+Added Room: Name=US_Driver

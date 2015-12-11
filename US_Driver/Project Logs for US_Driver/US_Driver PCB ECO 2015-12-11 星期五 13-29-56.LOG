@@ -1,0 +1,25 @@
+Removed Pin From Net: NetName=NetBR1_3 Pin=T1-1
+Removed Pin From Net: NetName=NetBR1_2 Pin=T1-2
+Removed Pin From Net: NetName=NetBR2_2 Pin=T1-3
+Removed Pin From Net: NetName=NetBR2_4 Pin=T1-4
+Removed Pin From Net: NetName=VS_1 Pin=T2-1
+Removed Pin From Net: NetName=VS_2 Pin=T2-2
+Removed Pin From Net: NetName=NetL2_2 Pin=T2-3
+Removed Pin From Net: NetName=NetC18_1 Pin=T2-4
+Added Component: Designator=Trans1(Trans_Part)
+Added Component: Designator=Trans2(Trans_Part)
+Added Component: Designator=Trans3(Trans_Part)
+Added Component: Designator=Trans4(Trans_Part)
+Added Pin To Net: NetName=NetBR1_3 Pin=Trans1-1
+Added Pin To Net: NetName=NetBR1_2 Pin=Trans1-2
+Added Pin To Net: NetName=NetBR2_4 Pin=Trans2-1
+Added Pin To Net: NetName=NetBR2_2 Pin=Trans2-2
+Added Pin To Net: NetName=VS_2 Pin=Trans3-1
+Added Pin To Net: NetName=VS_1 Pin=Trans3-2
+Added Pin To Net: NetName=NetL2_2 Pin=Trans4-1
+Added Pin To Net: NetName=NetC18_1 Pin=Trans4-2
+Added Member To Class: ClassName=US_Driver Member=Component Trans1 Trans_Part
+Added Member To Class: ClassName=US_Driver Member=Component Trans2 Trans_Part
+Added Member To Class: ClassName=US_Driver Member=Component Trans3 Trans_Part
+Added Member To Class: ClassName=US_Driver Member=Component Trans4 Trans_Part
+Added Room: Name=US_Driver

@@ -1,0 +1,3 @@
+Removed Pin From Net: NetName=NetBR1_3 Pin=F2-2
+Removed Member From Class: ClassName=US_Driver Member=F2
+Added Pin To Net: NetName=NetBR1_3 Pin=P1-3
